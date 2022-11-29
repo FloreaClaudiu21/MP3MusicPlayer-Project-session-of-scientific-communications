@@ -1,0 +1,25 @@
+D:\VisualStudio Projects\Personal\SongPlayer Project\bin\Debug\net5.0-windows\SongPlayer Project.exe
+D:\VisualStudio Projects\Personal\SongPlayer Project\bin\Debug\net5.0-windows\SongPlayer Project.deps.json
+D:\VisualStudio Projects\Personal\SongPlayer Project\bin\Debug\net5.0-windows\SongPlayer Project.runtimeconfig.json
+D:\VisualStudio Projects\Personal\SongPlayer Project\bin\Debug\net5.0-windows\SongPlayer Project.runtimeconfig.dev.json
+D:\VisualStudio Projects\Personal\SongPlayer Project\bin\Debug\net5.0-windows\SongPlayer Project.dll
+D:\VisualStudio Projects\Personal\SongPlayer Project\bin\Debug\net5.0-windows\SongPlayer Project.pdb
+D:\VisualStudio Projects\Personal\SongPlayer Project\obj\Debug\net5.0-windows\SongPlayer Project.csproj.AssemblyReference.cache
+D:\VisualStudio Projects\Personal\SongPlayer Project\obj\Debug\net5.0-windows\SongPlayer Project.csproj.GenerateResource.cache
+D:\VisualStudio Projects\Personal\SongPlayer Project\obj\Debug\net5.0-windows\SongPlayer Project.GeneratedMSBuildEditorConfig.editorconfig
+D:\VisualStudio Projects\Personal\SongPlayer Project\obj\Debug\net5.0-windows\SongPlayer Project.AssemblyInfoInputs.cache
+D:\VisualStudio Projects\Personal\SongPlayer Project\obj\Debug\net5.0-windows\SongPlayer Project.AssemblyInfo.cs
+D:\VisualStudio Projects\Personal\SongPlayer Project\obj\Debug\net5.0-windows\SongPlayer Project.csproj.CoreCompileInputs.cache
+D:\VisualStudio Projects\Personal\SongPlayer Project\obj\Debug\net5.0-windows\SongPlayer Project.dll
+D:\VisualStudio Projects\Personal\SongPlayer Project\obj\Debug\net5.0-windows\refint\SongPlayer Project.dll
+D:\VisualStudio Projects\Personal\SongPlayer Project\obj\Debug\net5.0-windows\SongPlayer Project.pdb
+D:\VisualStudio Projects\Personal\SongPlayer Project\obj\Debug\net5.0-windows\SongPlayer Project.genruntimeconfig.cache
+D:\VisualStudio Projects\Personal\SongPlayer Project\obj\Debug\net5.0-windows\ref\SongPlayer Project.dll
+D:\VisualStudio Projects\Personal\SongPlayer Project\obj\Debug\net5.0-windows\SongPlayer_Project.Properties.Resources.resources
+D:\VisualStudio Projects\Personal\SongPlayer Project\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
+D:\VisualStudio Projects\Personal\SongPlayer Project\bin\Debug\net5.0-windows\SpotifyAPI.Web.dll
+D:\VisualStudio Projects\Personal\SongPlayer Project\obj\Debug\net5.0-windows\SongPlayer Project.csproj.CopyComplete
+D:\VisualStudio Projects\Personal\SongPlayer Project\bin\Debug\net5.0-windows\AxInterop.WMPLib.dll
+D:\VisualStudio Projects\Personal\SongPlayer Project\bin\Debug\net5.0-windows\Interop.WMPLib.dll
+D:\VisualStudio Projects\Personal\SongPlayer Project\obj\Debug\net5.0-windows\SongPlayer_Project.Main.resources
+D:\VisualStudio Projects\Personal\SongPlayer Project\obj\Debug\net5.0-windows\SongPlayer_Project.Login.resources

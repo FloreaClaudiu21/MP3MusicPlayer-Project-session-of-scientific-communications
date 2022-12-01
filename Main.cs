@@ -15,11 +15,11 @@ namespace SongPlayer_Project {
     public partial class Main : Form {
         private Player player;
         private const int HTCLIENT = 0x1;
-        private const int HTCAPTION = 0x2;
+        private const int HTCAPTION = 0x2; 
+        private bool scrollClicked = false;
         private const int WM_NCHITTEST = 0x84;
         // MOVE THE WINDOW AROUND METHOD
-        protected override void WndProc(ref Message message)
-        {
+        protected override void WndProc(ref Message message) {
             base.WndProc(ref message);
             if (message.Msg == WM_NCHITTEST && (int)message.Result == HTCLIENT)
                 message.Result = (IntPtr)HTCAPTION;
@@ -29,6 +29,19 @@ namespace SongPlayer_Project {
             player = new Player(this);
             return;
         }
+        protected override void OnPaint(PaintEventArgs e) {
+            base.OnPaint(e);
+            if (player.requestNextSong) {
+                player.requestNextSong = false;
+                NextBtn.PerformClick();
+                return;
+            } else if(player.requestRepeatSong) {
+                player.requestRepeatSong = false;
+                player.repeat();
+                return;
+            }
+            return;
+        }
         private String split_path(string name) {
             if (!name.Contains(Path.DirectorySeparatorChar)) return name;
             string[] parts = name.Split(Path.DirectorySeparatorChar);
@@ -36,14 +49,14 @@ namespace SongPlayer_Project {
         }
         private void AddBtn_Click(object sender, EventArgs e) {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "MP3-Files|*.mp3";
+            ofd.Filter = "MP3-Files|*.mp3|WAV-Files|*.wav";
             DialogResult R = ofd.ShowDialog();
             if (R == DialogResult.OK) {
                 if (player.playlist.Count <= 0) {
                     playpanel.Show();
                 }
                 string fname = split_path(ofd.FileName);
-                Song song = new Song(ofd.FileName, fname, player.getLength(ofd.FileName));
+                Song song = new Song(ofd.FileName, fname);
                 try
                 {
                     player.playlist.Add(fname, song);
@@ -57,11 +70,15 @@ namespace SongPlayer_Project {
                 /////////////////////////////////////
                 player.stop();
                 player.clear();
+                SongTrackBar.Value = 0;
                 player.open(ofd.FileName);
                 player.playingSong = song;
                 player.playingIndex = player.playlist.Count - 1;
+                song.setDuration(player.getLength(ofd.FileName));
                 songlist.Items.Add(location + ". " + song.duration_string + " | " + fname);
                 songlist.SelectedIndex = location - 1;
+                SongTrackBar.Maximum = (int)song.duration;
+                endTrackLbl.Text = song.duration_string;
                 player.play();
                 return;
             }
@@ -91,9 +108,12 @@ namespace SongPlayer_Project {
             /////////////////////////
             player.stop();
             player.clear();
-            player.open(song.path);
+            player.open(song.path); 
+            SongTrackBar.Value = 0;
             player.playingSong = song;
             player.playingIndex = songlist.SelectedIndex;
+            endTrackLbl.Text = song.duration_string;
+            SongTrackBar.Maximum = (int)song.duration;
             player.play();
             return;
         }
@@ -105,7 +125,11 @@ namespace SongPlayer_Project {
                 PlayBtn.Text = "⏵Play";
                 SongPlayLbl.Text += " (paused)";
             } else {
-                player.play();
+                if (player.playingSong.ended) {
+                    player.repeat();
+                } else {
+                    player.play();
+                }
                 PlayBtn.Text = "⏹ Stop";
                 SongPlayLbl.Text = player.playingSong.name;
             }
@@ -114,18 +138,24 @@ namespace SongPlayer_Project {
         private void NextBtn_Click(object sender, EventArgs e) {
             if (player.playingSong == null) return;
             if (player.next()) {
+                SongTrackBar.Value = 0;
                 PlayBtn.Text = "⏹ Stop";
                 SongPlayLbl.Text = player.playingSong.name;
                 songlist.SelectedIndex = player.playingIndex;
+                endTrackLbl.Text = player.playingSong.duration_string;
+                SongTrackBar.Maximum = (int)player.playingSong.duration;
             }
             return;
         }
         private void PrevBtn_Click(object sender, EventArgs e) {
             if (player.playingSong == null) return;
-            if (player.prev()) {
+            if (player.prev()) { 
+                SongTrackBar.Value = 0;
                 PlayBtn.Text = "⏹ Stop";
                 SongPlayLbl.Text = player.playingSong.name;
                 songlist.SelectedIndex = player.playingIndex;
+                endTrackLbl.Text = player.playingSong.duration_string;
+                SongTrackBar.Maximum = (int)player.playingSong.duration;
             }
             return;
         }
@@ -135,10 +165,12 @@ namespace SongPlayer_Project {
                 player.stop();
                 player.clear();
                 playpanel.Hide();
+                endTrackLbl.Text = "";
                 songlist.Items.Clear();
                 player.playlist.Clear();
                 player.playingIndex = 0;
                 player.playingSong = null;
+                SongTrackBar.Maximum = (int)0;
             }
             return;
         }
@@ -146,6 +178,31 @@ namespace SongPlayer_Project {
             int volume = volumeBar.Value;
             player.songVolume = volume;
             player.setVolume(volume);
+            soundLbl.Text = (volume / 2) + "%";
+            return;
+        }
+        private void SongTrackBar_Scroll(object sender, EventArgs e) {
+            scrollClicked = true;
+            int value = SongTrackBar.Value;
+            minLabel.Text = translateMs(value);
+        }
+        private void SongTrackBar_MouseUp(object sender, MouseEventArgs e) {
+            scrollClicked = false;
+        }
+        private void SongTrackBar_ValueChanged(object sender, EventArgs e) {
+            if (!scrollClicked || player.playingSong == null) return;
+            int value = SongTrackBar.Value;
+            if ((value - 5) == (int)(player.playingPosition)) {
+                return;
+            }
+            player.seekTo(value);
+            scrollClicked = false;
+            SongPlayLbl.Text = "(" + translateMs(value) + "/" + player.playingSong.duration_string + ") " + player.playingSong.name;
+            return;
+        }
+        private void SongTrackBar_MouseMove(object sender, MouseEventArgs e) {
+            if (!scrollClicked || player.playingSong == null) return;
+            moveMinLabel(e.X);
             return;
         }
         public static string translateMs(long ms) {
@@ -155,17 +212,24 @@ namespace SongPlayer_Project {
             else if (t.Seconds > 0) return $"00:{t.Seconds}s";
             else return $"{t.Milliseconds}s";
         }
+        private void moveMinLabel(int X) {
+            minLabel.Location = new Point(X, minLabel.Location.Y);
+            return;
+        }
         class Song {
             public string path;
             public string name;
             public long duration;
             public long position = 0;
+            public bool ended = false;
             public bool paused = false;
-            public string duration_string;
+            public string? duration_string;
 
-            public Song(string path, string name, long duration) {
+            public Song(string path, string name) {
                 this.path = path;
                 this.name = name;
+            }
+            public void setDuration(long duration) {
                 this.duration = duration;
                 this.duration_string = translateMs(duration);
             }
@@ -175,7 +239,9 @@ namespace SongPlayer_Project {
             public Song? playingSong;
             public int songVolume = 200;
             public int playingIndex = 0;
-            public long playingPosition = 0;
+            public long playingPosition = 0; 
+            public bool requestNextSong = false;
+            public bool requestRepeatSong = false;
             private static System.Timers.Timer TIMER = new System.Timers.Timer();
             public Dictionary<String, Song> playlist = new Dictionary<String, Song>();
             [DllImport("winmm.dll")]
@@ -185,30 +251,52 @@ namespace SongPlayer_Project {
                 start_timer();
                 this.MAIN = m;
             }
+            public int progress_x() {
+                int value = MAIN.SongTrackBar.Value;
+                long max = playingSong.duration;
+                long progress = (value / max) * 100;
+                int left = (int)progress - MAIN.SongTrackBar.Width;
+                return 0;
+            }
             public void stop_timer() {
                 TIMER.Stop();
                 return;
             }
             private void start_timer() {
                 TIMER.Interval = 1000;
-                TIMER.Elapsed += OnTimedEvent;
+                TIMER.Elapsed += new System.Timers.ElapsedEventHandler(OnTimedEvent);
                 TIMER.Enabled = true;
                 TIMER.Start();
                 return;
             }
-            private void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e) {
-                if (playingSong == null || playingSong.paused) return;
+            private async void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e) {
+                if (playingSong == null || playingSong.paused || playingSong.ended) return;
                 long length = playingSong.duration;
                 long add = playingPosition + 1000;
                 if (add >= length) {
-                    playingSong = null;
+                    playingSong.ended = true;
+                    MAIN.SongTrackBar.Value = (int)length;
+                    if ((playingIndex + 1) < playlist.Count) {
+                        await Task.Delay(2000);
+                        requestNextSong = true;
+                        MAIN.Refresh();
+                    } else if (MAIN.RepeatBtn.Checked) {
+                        await Task.Delay(2000);
+                        requestRepeatSong = true;
+                        MAIN.Refresh();
+                    } else {
+                        MAIN.PlayBtn.Text = "⏵Play";
+                    } 
                     playingPosition = 0;
-                    if (next()) { // PLAY THE NEXT SONG
-                        MAIN.songlist.SelectedIndex = playingIndex;
-                    }
+                    MAIN.SongPlayLbl.Text = "(" + playingSong.duration_string + "/" + playingSong.duration_string + ") " + playingSong.name;
                     return;
                 }
                 playingPosition = add;
+                if (!MAIN.scrollClicked) {
+                    MAIN.moveMinLabel(84);
+                    MAIN.SongTrackBar.Value = (int)playingPosition;
+                    MAIN.minLabel.Text = translateMs(playingPosition);
+                }
                 MAIN.SongPlayLbl.Text = "(" + translateMs(playingPosition) + "/" + playingSong.duration_string + ") " + playingSong.name;
                 return;
             }
@@ -218,6 +306,7 @@ namespace SongPlayer_Project {
                 string Format = @"open ""{0}"" type MPEGVideo alias MediaFile";
                 string command = string.Format(Format, File);
                 mciSendString(command, null, 0, 0);
+                return;
             }
             public bool isPlaying(Song S) {
                 if (playingSong == null) {
@@ -231,20 +320,27 @@ namespace SongPlayer_Project {
             public void play() {
                 if (playingSong == null) return;
                 setVolume(songVolume);
+                playingSong.ended = false;
                 playingSong.paused = false;
                 string command = "play MediaFile";
                 mciSendString(command, null, 0, 0);
+                MAIN.soundLbl.Text = (songVolume / 2) + "%";
+                return;
             }
             public void stop() {
                 if (playingSong == null) return;
                 playingSong.paused = true;
                 string command = "stop MediaFile";
                 mciSendString(command, null, 0, 0);
+                return;
             }
             public void clear() {
+                if (playingSong == null) return;
                 playingPosition = 0;
+                playingSong.ended = false;
                 string command = "close MediaFile";
                 mciSendString(command, null, 0, 0);
+                return;
             }
             public bool next() {
                 if ((playingIndex + 1) >= playlist.Count) {
@@ -260,6 +356,7 @@ namespace SongPlayer_Project {
                 open(song.path);
                 playingSong = song;
                 playingIndex = playingIndex + 1;
+                MAIN.songlist.SelectedIndex = playingIndex;
                 play();
                 return true;
             }
@@ -280,9 +377,27 @@ namespace SongPlayer_Project {
                 play();
                 return true;
             }
+            public void repeat() {
+                if (playingSong == null || !playingSong.ended) return;
+                stop();
+                clear();
+                open(playingSong.path);
+                play();
+                return;
+            }
             public void setVolume(int volume) {
                 var command = "setaudio MediaFile volume to " + volume.ToString();
                 mciSendString(command, null, 0, 0);
+            }
+            public void seekTo(int position) {
+                if (playingSong == null) return;
+                stop();
+                clear();
+                open(playingSong.path);
+                mciSendString("seek MediaFile to " + position, null, 0, 0);
+                playingPosition = (long)position; 
+                play();
+                return;
             }
             public long getLength(string File) {
                 StringBuilder mssg = new StringBuilder(255);

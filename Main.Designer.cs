@@ -35,10 +35,16 @@
             this.CloseBtn = new System.Windows.Forms.Button();
             this.mainpanel = new System.Windows.Forms.Panel();
             this.playpanel = new System.Windows.Forms.Panel();
+            this.minLabel = new System.Windows.Forms.Label();
+            this.endTrackLbl = new System.Windows.Forms.Label();
+            this.StartTrackLbl = new System.Windows.Forms.Label();
+            this.SongTrackBar = new System.Windows.Forms.TrackBar();
             this.SongPlayLbl = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.songlist = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.RepeatBtn = new System.Windows.Forms.CheckBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.soundLbl = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.volumeBar = new System.Windows.Forms.TrackBar();
             this.button2 = new System.Windows.Forms.Button();
@@ -49,13 +55,16 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.songlist = new System.Windows.Forms.ListBox();
             this.AddBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.noResImg = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.mainpanel.SuspendLayout();
             this.playpanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SongTrackBar)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.volumeBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noResImg)).BeginInit();
@@ -94,26 +103,58 @@
             // 
             // mainpanel
             // 
+            resources.ApplyResources(this.mainpanel, "mainpanel");
             this.mainpanel.BackColor = System.Drawing.Color.White;
             this.mainpanel.Controls.Add(this.playpanel);
             this.mainpanel.Controls.Add(this.AddBtn);
             this.mainpanel.Controls.Add(this.label2);
             this.mainpanel.Controls.Add(this.noResImg);
-            resources.ApplyResources(this.mainpanel, "mainpanel");
             this.mainpanel.Name = "mainpanel";
             // 
             // playpanel
             // 
             resources.ApplyResources(this.playpanel, "playpanel");
             this.playpanel.BackColor = System.Drawing.Color.White;
+            this.playpanel.Controls.Add(this.minLabel);
+            this.playpanel.Controls.Add(this.endTrackLbl);
+            this.playpanel.Controls.Add(this.StartTrackLbl);
+            this.playpanel.Controls.Add(this.SongTrackBar);
             this.playpanel.Controls.Add(this.SongPlayLbl);
             this.playpanel.Controls.Add(this.label4);
-            this.playpanel.Controls.Add(this.songlist);
             this.playpanel.Controls.Add(this.panel2);
             this.playpanel.Controls.Add(this.pictureBox2);
             this.playpanel.Controls.Add(this.button1);
             this.playpanel.Controls.Add(this.label3);
+            this.playpanel.Controls.Add(this.songlist);
             this.playpanel.Name = "playpanel";
+            // 
+            // minLabel
+            // 
+            resources.ApplyResources(this.minLabel, "minLabel");
+            this.minLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(117)))), ((int)(((byte)(214)))));
+            this.minLabel.Name = "minLabel";
+            // 
+            // endTrackLbl
+            // 
+            resources.ApplyResources(this.endTrackLbl, "endTrackLbl");
+            this.endTrackLbl.Name = "endTrackLbl";
+            // 
+            // StartTrackLbl
+            // 
+            resources.ApplyResources(this.StartTrackLbl, "StartTrackLbl");
+            this.StartTrackLbl.Name = "StartTrackLbl";
+            // 
+            // SongTrackBar
+            // 
+            resources.ApplyResources(this.SongTrackBar, "SongTrackBar");
+            this.SongTrackBar.BackColor = System.Drawing.Color.White;
+            this.SongTrackBar.Name = "SongTrackBar";
+            this.SongTrackBar.TabStop = false;
+            this.SongTrackBar.TickFrequency = 50;
+            this.SongTrackBar.Scroll += new System.EventHandler(this.SongTrackBar_Scroll);
+            this.SongTrackBar.MouseCaptureChanged += new System.EventHandler(this.SongTrackBar_ValueChanged);
+            this.SongTrackBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SongTrackBar_MouseMove);
+            this.SongTrackBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SongTrackBar_MouseUp);
             // 
             // SongPlayLbl
             // 
@@ -125,18 +166,12 @@
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
             // 
-            // songlist
-            // 
-            resources.ApplyResources(this.songlist, "songlist");
-            this.songlist.BackColor = System.Drawing.SystemColors.Menu;
-            this.songlist.FormattingEnabled = true;
-            this.songlist.Name = "songlist";
-            this.songlist.SelectedIndexChanged += new System.EventHandler(this.songlist_SelectedIndexChanged);
-            // 
             // panel2
             // 
-            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.BackColor = System.Drawing.Color.LightGray;
+            this.panel2.Controls.Add(this.RepeatBtn);
+            this.panel2.Controls.Add(this.pictureBox3);
+            this.panel2.Controls.Add(this.soundLbl);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.volumeBar);
             this.panel2.Controls.Add(this.button2);
@@ -144,7 +179,27 @@
             this.panel2.Controls.Add(this.NextBtn);
             this.panel2.Controls.Add(this.PlayBtn);
             this.panel2.Controls.Add(this.PrevBtn);
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
+            // 
+            // RepeatBtn
+            // 
+            resources.ApplyResources(this.RepeatBtn, "RepeatBtn");
+            this.RepeatBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(117)))), ((int)(((byte)(214)))));
+            this.RepeatBtn.Name = "RepeatBtn";
+            this.RepeatBtn.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::SongPlayer_Project.Properties.Resources.repeat_button;
+            resources.ApplyResources(this.pictureBox3, "pictureBox3");
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.TabStop = false;
+            // 
+            // soundLbl
+            // 
+            resources.ApplyResources(this.soundLbl, "soundLbl");
+            this.soundLbl.Name = "soundLbl";
             // 
             // label5
             // 
@@ -193,10 +248,10 @@
             // 
             // PlayBtn
             // 
-            this.PlayBtn.BackColor = System.Drawing.Color.DimGray;
+            this.PlayBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(117)))), ((int)(((byte)(214)))));
             this.PlayBtn.FlatAppearance.BorderSize = 0;
             resources.ApplyResources(this.PlayBtn, "PlayBtn");
-            this.PlayBtn.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.PlayBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.PlayBtn.Name = "PlayBtn";
             this.PlayBtn.UseVisualStyleBackColor = false;
             this.PlayBtn.Click += new System.EventHandler(this.PlayBtn_Click);
@@ -236,6 +291,14 @@
             this.label3.Name = "label3";
             this.label3.UseCompatibleTextRendering = true;
             // 
+            // songlist
+            // 
+            resources.ApplyResources(this.songlist, "songlist");
+            this.songlist.BackColor = System.Drawing.SystemColors.Menu;
+            this.songlist.FormattingEnabled = true;
+            this.songlist.Name = "songlist";
+            this.songlist.SelectedIndexChanged += new System.EventHandler(this.songlist_SelectedIndexChanged);
+            // 
             // AddBtn
             // 
             resources.ApplyResources(this.AddBtn, "AddBtn");
@@ -257,8 +320,8 @@
             // 
             // noResImg
             // 
-            this.noResImg.Image = global::SongPlayer_Project.Properties.Resources.no_results;
             resources.ApplyResources(this.noResImg, "noResImg");
+            this.noResImg.Image = global::SongPlayer_Project.Properties.Resources.no_results;
             this.noResImg.Name = "noResImg";
             this.noResImg.TabStop = false;
             // 
@@ -276,11 +339,12 @@
             this.Name = "Main";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.mainpanel.ResumeLayout(false);
-            this.mainpanel.PerformLayout();
             this.playpanel.ResumeLayout(false);
             this.playpanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SongTrackBar)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.volumeBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noResImg)).EndInit();
@@ -313,5 +377,12 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TrackBar volumeBar;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TrackBar SongTrackBar;
+        private System.Windows.Forms.Label endTrackLbl;
+        private System.Windows.Forms.Label StartTrackLbl;
+        private System.Windows.Forms.Label minLabel;
+        private System.Windows.Forms.Label soundLbl;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.CheckBox RepeatBtn;
     }
 }

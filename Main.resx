@@ -232,7 +232,7 @@
     <value>NoControl</value>
   </data>
   <data name="endTrackLbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>738, 514</value>
+    <value>773, 514</value>
   </data>
   <data name="endTrackLbl.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 17</value>

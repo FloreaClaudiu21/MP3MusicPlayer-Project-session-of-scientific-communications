@@ -9,7 +9,8 @@
       "SongPlayer Project/1.0.0": {
         "dependencies": {
           "SpotifyAPI.Web": "7.0.0",
-          "WMPLib": "1.0.0"
+          "WMPLib": "1.0.0",
+          "CSVideoPlayer": "1.0.3.0"
         },
         "runtime": {
           "SongPlayer Project.dll": {}
@@ -45,6 +46,22 @@
             "fileVersion": "1.0.0.0"
           }
         }
+      },
+      "CSVideoPlayer/1.0.3.0": {
+        "runtime": {
+          "CSVideoPlayer.dll": {
+            "assemblyVersion": "1.0.3.0",
+            "fileVersion": "1.0.3.0"
+          }
+        }
+      },
+      "FFmpeg.AutoGen/4.2.2.1": {
+        "runtime": {
+          "FFmpeg.AutoGen.dll": {
+            "assemblyVersion": "4.2.2.1",
+            "fileVersion": "4.2.2.1"
+          }
+        }
       }
     }
   },
@@ -74,6 +91,16 @@
       "sha512": "sha512-hhTCfENN7xrSfUG7hrd/A9YiXVMVGHAc3Hv0USe6SvpacIDxVwiBb1X3nVzELpLtewjqqFy5dsWHwImpUy3vyw==",
       "path": "wmplib/1.0.0",
       "hashPath": "wmplib.1.0.0.nupkg.sha512"
+    },
+    "CSVideoPlayer/1.0.3.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FFmpeg.AutoGen/4.2.2.1": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

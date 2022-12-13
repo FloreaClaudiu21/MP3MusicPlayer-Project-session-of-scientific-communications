@@ -23,3 +23,9 @@ D:\VisualStudio Projects\Personal\SongPlayer Project\bin\Debug\net5.0-windows\Ax
 D:\VisualStudio Projects\Personal\SongPlayer Project\bin\Debug\net5.0-windows\Interop.WMPLib.dll
 D:\VisualStudio Projects\Personal\SongPlayer Project\obj\Debug\net5.0-windows\SongPlayer_Project.Main.resources
 D:\VisualStudio Projects\Personal\SongPlayer Project\obj\Debug\net5.0-windows\SongPlayer_Project.Login.resources
+D:\VisualStudio Projects\Personal\SongPlayer Project\bin\Debug\net5.0-windows\CSVideoPlayer.dll
+D:\VisualStudio Projects\Personal\SongPlayer Project\bin\Debug\net5.0-windows\FFmpeg.AutoGen.dll
+D:\VisualStudio Projects\Personal\SongPlayer Project\bin\Debug\net5.0-windows\CSVideoPlayer.pdb
+D:\VisualStudio Projects\Personal\SongPlayer Project\bin\Debug\net5.0-windows\CSVideoPlayer.xml
+D:\VisualStudio Projects\Personal\SongPlayer Project\bin\Debug\net5.0-windows\FFmpeg.AutoGen.pdb
+D:\VisualStudio Projects\Personal\SongPlayer Project\bin\Debug\net5.0-windows\FFmpeg.AutoGen.xml

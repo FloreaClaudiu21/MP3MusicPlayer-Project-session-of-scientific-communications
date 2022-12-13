@@ -130,13 +130,16 @@
   <data name="images" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="lock-icon-17" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lock-icon-17.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="png-clipart-rhythm-musical-note-graphics-musical-notation-musical-note-angle-monochrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png-clipart-rhythm-musical-note-graphics-musical-notation-musical-note-angle-monochrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="download" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="lock-icon-17" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lock-icon-17.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="repeat-button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\repeat-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
